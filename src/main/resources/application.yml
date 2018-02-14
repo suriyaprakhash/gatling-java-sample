@@ -1,0 +1,46 @@
+
+server:
+  port: 8080
+  context-path: /gtog  
+spring:
+  http: 
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# spring security
+security:
+  user:
+    name: suriya
+    password: secret
+    
+# logging
+logging:
+  level:
+    com:
+      example:
+        controller: ERROR    
+
+# mangement with spring boot actuator 
+# works only with embedded tomcat   
+management:
+  port: 9001
+  security: 
+    # for metrics
+    enabled: true
+    
+# actuator endpoints    
+endpoints:
+  info:
+    enabled: true
+  health:
+    enabled: true
+  metrics:
+    enabled: true
+
+# info endpoint 
+info:
+  app:
+    name: demo-app
+    descritpion: This is just an demo assignment app
+    version: 0.0.1-SNAPSHOT

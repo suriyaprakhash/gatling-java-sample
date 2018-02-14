@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<h1>Gtog Result</h1>
+
+<!-- #strings.escapeXml( text ) to prevent XSS injection and unwanted formatting -  -->
+<!-- <p th:utext="${#strings.replace( #strings.escapeXml( message ),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}" ></p> -->
+<p th:utext="${#strings.replace( #strings.escapeXml( message ),'/n','&lt;br /&gt;')}" ></p>
+<button onclick="goBack()">Go Back</button>
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+
+</body>
+</html>
