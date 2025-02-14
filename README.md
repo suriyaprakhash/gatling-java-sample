@@ -1,91 +1,44 @@
-# Demo
+# Gatling with Spring boot java example 
 
-This is base template project based on spring boot
+This project explains how to use [Gatling](https://gatling.io/) using the crud operations for http request.
 
-## Running the application in CLI
-```sh
-mvn spring-boot:run
+## Run
+
+### Database 
+
+This project uses **mongodb** as the state. So run [the docker compose]() to have the **mongodb** and **mongo express** 
+to start with.
+
+### Application to test
+
+You can run the following project using,
+```
+java -jar 
+```
+or in your IDE of your choice.
+
+To test the CRUD you can navigate to,
+
+```
+http://localhost:8080/swagger-ui/index.html
 ```
 
-To Stop the running process in _windows_,
+### Actual perf testing using Gatling
 
-```sh
-netstat -ano | find "8080"
+Check the plugin in the pom for more info on configuring which Simulations to run.
+
 ```
-it shows the ```PID```
-
-```sh
-taskkill /f /pid {PID}
+./gradlew.bat gatling:test
 ```
 
-## Accessing the endpoint
+By the preceding way, it'll be easier for you to configure and run using any CI/CD of your choice.
 
-The endpoint is behind the basic spring security ```suriya``` and password as ```secret```
+## Output
 
-```sh
-curl -u suriya http://localhost:8080/demo/start
-```
-
-## Accessing actuator endpoints
-
-```sh
-curl http://localhost:9001/info
-```
-
-_Management_ port is set to ```9001```
-
-## Build
-This profile ```demo``` spits out ```jar```
-```sh
-mvn package -Pdemo
-```
-This  profile ```exttomcat``` spits out ```war```
-```sh
-mvn package -Pexttomcat
-```
-
-###########
+Once you run the **gatling:test** plugin, you can view the test results in the */build* folder.
 
 
-# Prerequisite
+# TODO
 
-These are the reqired artifacts to run the application,
-
-1. IDE
-2. Lombok
-3. Java 1.8
-4. Maven
-5. Docker
-6. Web browser
-
-## Assumptions
-
-### Direct input
-1. Has to be 3 split with space seperator
-2. Has to have "is" in the middle
-3. Galatic string before is
-4. Roman string after is
-
-### Indirect input
-1. Ends with credits
-2. Credit value is before the text "credits"
-3. Value is int
-4. Separator should be space
-
-### Direct question
-1. Should start with "how much is"
-2. End with "?"
-3. Has only galactic string
-
-### Indirect question
-1. Should start with "how many Credits is"
-2. Ends with "?"
-3. Has one or many galactic string and one metal
-
-### Irrevelant question
-1. Can be anything thing that it irrevelant to the about assumptions 
-
-
-
-
-
+- Try to connect app with custom user instead of *root* & *pass*
+- Pageable SORT isn't working
