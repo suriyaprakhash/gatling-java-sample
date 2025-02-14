@@ -13,7 +13,7 @@ to start with.
 
 You can run the following project using,
 ```
-java -jar 
+java -jar gatling-java-sample.jar
 ```
 or in your IDE of your choice.
 
@@ -40,5 +40,6 @@ Once you run the **gatling:test** plugin, you can view the test results in the *
 
 # TODO
 
+- Add Gatling sims
 - Try to connect app with custom user instead of *root* & *pass*
 - Pageable SORT isn't working
