@@ -9,6 +9,8 @@ import io.gatling.javaapi.http.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
+ * THIS, I ADDED HERE TO SHOW MULTIPLE SIMULATIONS
+ *
  * This sample is based on our official tutorials:
  * <ul>
  *   <li><a href="https://docs.gatling.io/tutorials/recorder/">Gatling quickstart tutorial</a>
