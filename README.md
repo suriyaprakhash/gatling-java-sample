@@ -39,8 +39,12 @@ http://localhost:8080/swagger-ui/index.html
 Check the plugin in the **build.gradle** for more info on configuring which Simulations to run.
 
 ```
-./gradlew gatlingRun --simulation=com.suriyaprakhash.gatling_java_sample.simulations.InventorySimulation
+./gradlew gatlingRun --simulation=com.suriyaprakhash.gatling_java_sample.simulations.InventorySimulation -DingestionType=rampup
 ```
+
+here,
+  - **simulation** - specifies the class to run
+  - **ingestionType** - is a custom system property to select the **stepUp** in the *InventorySimulation* 
 
 By the preceding way, it'll be easier for you to configure and run using any CI/CD of your choice.
 

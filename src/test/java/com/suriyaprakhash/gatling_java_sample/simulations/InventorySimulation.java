@@ -80,21 +80,22 @@ public class InventorySimulation extends Simulation {
                 getInventoryById);
 
 
-        /// MAIN - COMMENT ONE SETUP ///////
+        /// MAIN  ///////
 
-        // base setup - both these will execute in parallel
-//        setUp(
-//                user.injectOpen(atOnceUsers(1)),
-//                admin.injectOpen(atOnceUsers(1))
-//        ).protocols(httpProtocol);
-
-
-        // for more complex rampUp realtime use case - all these will execute in parallel
-        setUp(
-                user.injectOpen(rampUsers(10).during(60)),
-                manager.injectOpen(rampUsersPerSec(5).to(60).during(Duration.ofSeconds(60))),
-                admin.injectClosed(rampConcurrentUsers(1).to(2).during(Duration.ofSeconds(10)))
-        ).protocols(httpProtocol);
+        if ("rampup".equalsIgnoreCase(System.getProperty("ingestionType"))) {
+            // for more complex rampUp realtime use case - all these will execute in parallel
+            setUp(
+                    user.injectOpen(rampUsers(10).during(60)),
+                    manager.injectOpen(rampUsersPerSec(5).to(60).during(Duration.ofSeconds(60))),
+                    admin.injectClosed(rampConcurrentUsers(1).to(2).during(Duration.ofSeconds(10)))
+            ).protocols(httpProtocol);
+        } else {
+            // base setup - both these will execute in parallel
+            setUp(
+                    user.injectOpen(atOnceUsers(1)),
+                    admin.injectOpen(atOnceUsers(1))
+            ).protocols(httpProtocol);
+        }
 
     }
 
