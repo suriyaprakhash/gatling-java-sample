@@ -1,6 +1,5 @@
 package com.suriyaprakhash.gatling_java_sample.simulations;
 
-import com.suriyaprakhash.gatling_java_sample.inventory.InventorySortField;
 import com.suriyaprakhash.gatling_java_sample.inventory.InventoryType;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
 import net.datafaker.Faker;

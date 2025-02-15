@@ -5,7 +5,6 @@ import com.suriyaprakhash.gatling_java_sample.inventory.InventorySortField;
 import io.gatling.javaapi.core.ChainBuilder;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
-import org.springframework.data.domain.Sort;
 
 import static com.suriyaprakhash.gatling_java_sample.simulations.InventoryUtil.*;
 import static io.gatling.javaapi.core.CoreDsl.*;
@@ -17,34 +16,58 @@ public class InventorySimulation extends Simulation {
     public InventorySimulation() {
 
         ChainBuilder addInventory = exec(
+                feed(feedData()),
                 http("Add inventory item")
                         .post("/inventory")
                         .header("Content-Type", "application/json")
                         .body(StringBody("""
                               {
-                                "name": "%s",
-                                "type":  "%s",
-                                "availableCount": %s,
-                                "price": %s
+                                "name": "#{name}",
+                                "type": "#{type}",
+                                "availableCount": #{availableCount},
+                                "price": #{price}
                               }
-                              """.formatted("#{name}","#{type}", "#{availableCount}", "#{price}"))),
-                feed(feedData())
+                              """))
+
         );
 
-        ChainBuilder getInventory = exec(
+        ChainBuilder getAllInventory = exec(
                 http("Get inventory item list")
                         .get("/inventory")
-                        .queryParam("page", getRandomInt(10) + "")
+                        .queryParam("page", 0)
                         .queryParam("sizePerPage", getRandomInt(10) + 1  + "")
                         .queryParam("inventorySortField", getRandomEnumString(InventorySortField.class))
                         .queryParam("sortDirection", getRandomEnumString(SortDirection.class))
                         .check(status().is(200))
+                        .check(jsonPath("$..content[0].uuid").saveAs("uuid"))
+//                        .check(jsonPath("$..content[0].uuid").is("7b672608-3dbe-4d9a-821c-50bd5fbc1c83"))
         );
 
-        ScenarioBuilder users = scenario("Users").exec(addInventory);
+        ChainBuilder printUuidFromSession = exec(session -> {
+            System.out.println("Printing session UUID : " + session.getString("uuid"));
+            return session;
+        });
+
+        ChainBuilder getInventoryById = exec(
+                doIf(session -> session.contains("uuid")).then(
+                        http("Get inventory item by UUID")
+                                .get("/inventory/#{uuid}")
+                                .check(status().is(200))
+
+                )
+        );
+
+        ScenarioBuilder admin = scenario("Admin").exec(addInventory);
+        ScenarioBuilder users = scenario("Users").exec(
+                getAllInventory,
+                pause(1),
+                printUuidFromSession,
+                getInventoryById);
+
 
         setUp(
-                users.injectOpen(atOnceUsers(1))
+                users.injectOpen(atOnceUsers(1)),
+                admin.injectOpen(atOnceUsers(1))
         ).protocols(httpProtocol);
     }
 

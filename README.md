@@ -40,6 +40,12 @@ Once you run the **gatling:test** plugin, you can view the test results in the *
 
 # TODO
 
-- Add Gatling sims
+- Add Gatling sims - sessions
 - Try to connect app with custom user instead of *root* & *pass*
 - Pageable SORT isn't working as usual - but had a workaround for now. Fix it later.
+
+# Things to note
+
+- Add the dependency needed by gatling as ***gatlingRuntimeOnly***
+- Other transitive dependency which is part of the project won't be available during runtime
+- Session var and the feed var can be accessed by using ***#{key}***
