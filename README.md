@@ -28,7 +28,7 @@ http://localhost:8080/swagger-ui/index.html
 Check the plugin in the pom for more info on configuring which Simulations to run.
 
 ```
-./gradlew gatling:test --simulation=com.suriyaprakhash.gatling_java_sample.simulations.ComputerDatabaseSimulation
+./gradlew gatlingRun --simulation=com.suriyaprakhash.gatling_java_sample.simulations.ComputerDatabaseSimulation
 ```
 
 By the preceding way, it'll be easier for you to configure and run using any CI/CD of your choice.

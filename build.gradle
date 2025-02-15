@@ -32,19 +32,11 @@ dependencies {
 
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.4'
 
-//	implementation 'io.gatling.highcharts:gatling-charts-highcharts:3.13.4'
-//	implementation 'io.gatling.highcharts:gatling-app:3.13.4'
-
-
-	implementation 'io.gatling:gatling-core:3.13.4'
-	implementation 'io.gatling:gatling-test-framework:3.13.4'
-	implementation 'org.scala-lang:scala-library:2.13.11'
-	implementation("io.gatling.highcharts:gatling-charts-highcharts:3.13.4")
-
-//	gatling "io.gatling.highcharts:gatling-charts-highcharts:3.13.4"
-//	gatling "io.gatling:gatling-test-framework:3.13.4"
+	// this is one dependency needed for gatling for the test suite
+	testImplementation 'io.gatling:gatling-test-framework:3.13.4'
 
 	testImplementation 'net.datafaker:datafaker:2.4.2'
+	gatlingRuntimeOnly 'net.datafaker:datafaker:2.4.2'
 //	testImplementation ('com.github.javafaker:javafaker:1.0.2') { exclude module: 'org.yaml' }
 //	testImplementation group: 'org.yaml', name: 'snakeyaml', version: '1.26'
 }
@@ -56,27 +48,3 @@ tasks.jar {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-//sourceSets {
-//	gatling {
-//		java {
-//			srcDirs = ['src/test/java']
-//		}
-//		resources {
-//			srcDirs = ['src/test/resources']
-//		}
-//	}
-//}
-
-//
-
-//gatling {
-//	configurations {
-//			runMultipleSimulations = true
-//	}
-//}
-
-//configurations {
-//	gatlingImplementation.extendsFrom testImplementation
-//	gatlingRuntimeOnly.extendsFrom testRuntimeOnly
-//}

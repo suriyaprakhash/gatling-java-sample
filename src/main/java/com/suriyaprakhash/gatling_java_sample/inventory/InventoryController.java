@@ -31,10 +31,10 @@ public class InventoryController {
 
     @Schema(example = "1b86de0d-7e40-452c-ab1c-1c0b6b094047", description = "Get the inventory items by pagable")
     @GetMapping
-    public ResponseEntity<Page<InventoryEntity>> findAllByPage(@RequestParam(defaultValue = "0") int page,
-                                           @RequestParam(defaultValue = "2") int sizePerPage,
-                                           @RequestParam(defaultValue = "ID") InventorySortField inventorySortField,
-                                           @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection) {
+    public ResponseEntity<Page<InventoryEntity>> findAllByPage(@RequestParam(defaultValue = "0", required = false) int page,
+                                           @RequestParam(defaultValue = "2", required = false) int sizePerPage,
+                                           @RequestParam(defaultValue = "NAME", required = false ) InventorySortField inventorySortField,
+                                           @RequestParam(defaultValue = "ASC", required = false) Sort.Direction sortDirection) {
 //    public ResponseEntity<Page<InventoryEntity>> getInventoryItems(Pageable pageable) {
         // ACTUAL PAGEABLE ISN'T WORKING SO DOING A WORKARDOUND
         Pageable pageable = PageRequest.of(page, sizePerPage, sortDirection, inventorySortField.getDatabaseFieldName());
