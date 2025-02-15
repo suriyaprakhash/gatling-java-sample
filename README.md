@@ -28,7 +28,7 @@ http://localhost:8080/swagger-ui/index.html
 Check the plugin in the pom for more info on configuring which Simulations to run.
 
 ```
-./gradlew.bat gatling:test
+./gradlew gatling:test --simulation=com.suriyaprakhash.gatling_java_sample.simulations.ComputerDatabaseSimulation
 ```
 
 By the preceding way, it'll be easier for you to configure and run using any CI/CD of your choice.
@@ -42,4 +42,4 @@ Once you run the **gatling:test** plugin, you can view the test results in the *
 
 - Add Gatling sims
 - Try to connect app with custom user instead of *root* & *pass*
-- Pageable SORT isn't working
+- Pageable SORT isn't working as usual - but had a workaround for now. Fix it later.

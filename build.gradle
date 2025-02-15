@@ -3,10 +3,15 @@ plugins {
 	id 'org.springframework.boot' version '3.4.2'
 	id 'io.spring.dependency-management' version '1.1.7'
 	id "io.freefair.lombok" version "8.12.1"
+//	id 'io.gatling.gradle' version '3.9.5'
+	// The following line allows to load io.gatling.gradle plugin and directly apply it
+	id 'io.gatling.gradle' version '3.13.4'
 }
 
 group = 'com.suriyaprakhash'
 version = '0.0.1-SNAPSHOT'
+
+//ext.springdocopenapiStarterWebmvcUi = "2.8.4"
 
 java {
 	toolchain {
@@ -22,13 +27,26 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.4'
-
-//	compileOnly 'io.freefair.lombok:lombok:8.12.1'
-//	annotationProcessor 'io.freefair.lombok:lombok:8.12.1'
-
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.4'
+
+//	implementation 'io.gatling.highcharts:gatling-charts-highcharts:3.13.4'
+//	implementation 'io.gatling.highcharts:gatling-app:3.13.4'
+
+
+	implementation 'io.gatling:gatling-core:3.13.4'
+	implementation 'io.gatling:gatling-test-framework:3.13.4'
+	implementation 'org.scala-lang:scala-library:2.13.11'
+	implementation("io.gatling.highcharts:gatling-charts-highcharts:3.13.4")
+
+//	gatling "io.gatling.highcharts:gatling-charts-highcharts:3.13.4"
+//	gatling "io.gatling:gatling-test-framework:3.13.4"
+
+	testImplementation 'net.datafaker:datafaker:2.4.2'
+//	testImplementation ('com.github.javafaker:javafaker:1.0.2') { exclude module: 'org.yaml' }
+//	testImplementation group: 'org.yaml', name: 'snakeyaml', version: '1.26'
 }
 
 tasks.jar {
@@ -38,3 +56,27 @@ tasks.jar {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+//sourceSets {
+//	gatling {
+//		java {
+//			srcDirs = ['src/test/java']
+//		}
+//		resources {
+//			srcDirs = ['src/test/resources']
+//		}
+//	}
+//}
+
+//
+
+//gatling {
+//	configurations {
+//			runMultipleSimulations = true
+//	}
+//}
+
+//configurations {
+//	gatlingImplementation.extendsFrom testImplementation
+//	gatlingRuntimeOnly.extendsFrom testRuntimeOnly
+//}
