@@ -13,14 +13,24 @@ Other items include,
   - could be a **Iterator** of **Map<String, String>** for dynamic inputs
   - could be a csv file where the data is fed from
 
+## Pre-requisite
+
+- [Java 21](https://openjdk.org/projects/jdk/21/)
+- [Mongo DB](https://github.com/suriyaprakhash/docker-collection/tree/master/services/mongo)
+
 ## Run
 
 ### Database 
 
-This project uses **mongodb** as the state. So run [the docker compose]() to have the **mongodb** and **mongo express** 
+This project uses **mongodb** as the state. So run [the docker compose](https://github.com/suriyaprakhash/docker-collection/tree/master/services/mongo#mongo--mongo-express) to have the **mongodb** and **mongo express** 
 to start with.
 
 ### Application to test
+
+Build the jar,
+```
+.\gradlew jar
+```
 
 You can run the following project using,
 ```
